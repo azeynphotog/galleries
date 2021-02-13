@@ -1,0 +1,5 @@
+1.0.1:
+    - "Initialize plugin."
+    - create_images_table.php
+    - create_models_table.php
+    - create_collections_table.php

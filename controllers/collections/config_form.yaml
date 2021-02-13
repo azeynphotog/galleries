@@ -1,0 +1,12 @@
+name: azeyn.galleries::lang.collections.create_collection
+form: ~/plugins/azeyn/galleries/models/collection/fields.yaml
+modelClass: Azeyn\Galleries\Models\Collection
+defaultRedirect: azeyn/galleries/collections
+
+create:
+    redirect: azeyn/galleries/collections/update/:id
+    redirectClose: azeyn/galleries/collections
+
+update:
+    redirect: azeyn/galleries/collections
+    redirectClose: azeyn/galleries/collections

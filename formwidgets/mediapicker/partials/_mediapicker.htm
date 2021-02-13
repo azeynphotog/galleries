@@ -1,0 +1,55 @@
+<div
+    id="<?= $this->getId() ?>"
+    class="field-mediapicker <?= $value ? 'is-populated' : '' ?>"
+    data-control="mediapicker"
+    <?= $field->getAttributes() ?>
+>
+    <a href="javascript:;" class="btn btn-default oc-icon-plus-circle file-add-button m-b" role="button">
+        <?= e(trans('azeyn.galleries::lang.images.select')) ?>
+    </a>
+    <div class="control-list">
+        <table class="table data" data-file-list>
+            <thead>
+            <tr>
+                <th></th>
+                <th><span><?= e(trans('azeyn.galleries::lang.images.filename')) ?></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="no-data">
+                <td colspan="2">
+                    <p class="no-data">
+                        <?= e(trans('azeyn.galleries::lang.images.no_images')) ?>
+                    </p>
+                </td>
+            </tr>
+            <?php for ($i = 0; $i < count($value); $i++) { ?>
+            <tr data-file-item>
+                <td>
+                    <a href="javascript:;" class="file-remove-button">
+                        <i class="icon-times"></i>
+                    </a>
+                </td>
+                <td>
+                    <span data-file-name><?= e($value[$i]['title']) ?></span>
+                    <input type="hidden" name="<?= $field->getName() ?>[]" value="<?= e($value[$i]['path']) ?>" data-file-path />
+                </td>
+            </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <template data-file-template>
+            <tr data-file-item>
+                <td>
+                    <a href="javascript:;" class="file-remove-button">
+                        <i class="icon-times"></i>
+                    </a>
+                </td>
+                <td>
+                    <span data-file-name></span>
+                    <input type="hidden" name="<?= $field->getName() ?>[]" value="" data-file-path />
+                </td>
+            </tr>
+        </template>
+    </div>
+</div>

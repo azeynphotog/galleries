@@ -1,0 +1,14 @@
+{
+    "name": "azeyn/galleries",
+    "type": "october-plugin",
+    "authors": [
+        {
+            "name": "Azeyn",
+            "email": "hi@azeyn.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "composer/installers": "~1.0"
+    }
+}

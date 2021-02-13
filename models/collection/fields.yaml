@@ -1,0 +1,29 @@
+fields:
+    name:
+        label: azeyn.galleries::lang.collections.name
+        span: left
+        required: true
+    slug:
+        label: azeyn.galleries::lang.collections.slug
+        preset:
+            field: name
+            type: slug
+        span: right
+        required: true
+    image:
+        type: mediapicker
+    date:
+        label: Date
+        type: datepicker
+        mode: date
+        span: left
+    published_at:
+        label: azeyn.galleries::lang.collections.published_at
+        type: datepicker
+        mode: date
+        span: right
+        required: true
+    description:
+        label: azeyn.galleries::lang.collections.description
+        type: richeditor
+        span: full

@@ -1,0 +1,8 @@
+fields:
+    name:
+        label: Name
+    slug:
+        label: Slug
+        preset:
+            field: name
+            type: slug
