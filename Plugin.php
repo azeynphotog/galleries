@@ -2,6 +2,7 @@
 
 namespace Azeyn\Galleries;
 
+use Azeyn\Galleries\EventListeners\ImageDeletedListener;
 use Azeyn\Galleries\EventListeners\ImageModifiedListener;
 use Azeyn\Galleries\EventListeners\ImageUploadedListener;
 use Backend;
@@ -67,6 +68,7 @@ class Plugin extends PluginBase
     {
         Event::listen('media.file.move', ImageModifiedListener::class);
         Event::listen('media.file.rename', ImageModifiedListener::class);
-        Event::listen('media.file.upload', ImageUploadedListener::class);
+        Event::listen('model.afterCreate', ImageUploadedListener::class);
+        Event::listen('model.beforeDelete', ImageDeletedListener::class);
     }
 }

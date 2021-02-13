@@ -3,16 +3,20 @@
 namespace Azeyn\Galleries\EventListeners;
 
 use Azeyn\Galleries\Models\DecoratedImage;
-use Backend\Widgets\MediaManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use October\Rain\Database\Model;
+use System\Models\File;
 
 class ImageUploadedListener
 {
-    public function handle(MediaManager $widget, string $path, UploadedFile $file): void
+    public function handle(Model $model): void
     {
+        if (!is_a($model, File::class)) {
+            return;
+        }
+
         $image = new DecoratedImage();
-        $image->path = $path;
-        $image->image = $file;
+        $image->path = $model->path;
+        $image->image = $model;
         $image->save();
     }
 }

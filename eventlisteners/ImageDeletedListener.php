@@ -3,13 +3,22 @@
 namespace Azeyn\Galleries\EventListeners;
 
 use Azeyn\Galleries\Models\DecoratedImage;
-use Backend\Widgets\MediaManager;
+use October\Rain\Database\Model;
+use System\Models\File;
 
 class ImageDeletedListener
 {
-    public function handle(MediaManager $widget, string $path): void
+    public function handle(Model $model): void
     {
-        $image = DecoratedImage::findOrFail($path);
+        if (!is_a($model, File::class)) {
+            return;
+        }
+
+        $image = DecoratedImage::find($model->path);
+        if (!$image) {
+            return;
+        }
+
         $image->delete();
     }
 }
