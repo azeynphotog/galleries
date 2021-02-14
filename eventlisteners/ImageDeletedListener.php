@@ -10,7 +10,7 @@ class ImageDeletedListener
 {
     public function handle(Model $model): void
     {
-        if (!is_a($model, File::class)) {
+        if (!is_a($model, File::class) || !$model->isImage()) {
             return;
         }
 
