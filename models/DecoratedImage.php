@@ -7,7 +7,7 @@ use System\Models\File;
 
 class DecoratedImage extends BaseModel
 {
-    protected $table = 'azeyn_galleries_image';
+    protected $table = 'azeyn_galleries_images';
     public $attachOne = [
         'media' => File::class
     ];
