@@ -16,6 +16,7 @@ class CreateCollectionsTable extends Migration
             $table->string('slug')->unique();
             $table->timestamp('date')->nullable();
             $table->text('description')->nullable();
+            $table->timestamp('published_at');
             $table->timestamps();
         });
         Schema::create('azeyn_galleries_collection_image', function ($table) {
