@@ -12,7 +12,8 @@ class CreateImagesTable extends Migration
         Schema::create('azeyn_galleries_images', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->text('metadata');
+            $table->string('path')->unique();
+            $table->text('metadata')->default('{}');
             $table->timestamps();
         });
     }

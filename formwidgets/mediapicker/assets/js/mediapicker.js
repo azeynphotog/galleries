@@ -18,7 +18,7 @@
         this.$el.on('click', '.file-add-button', this.proxy(this.onClickFindButton))
         this.$el.on('click', '.file-remove-button', this.proxy(this.onClickRemoveButton))
 
-        this.$fileTemplate = $('[data-file-template]', this.$el).first()
+        this.$fileTemplate = $('[data-file-template]', this.$el).first().html()
     }
 
     MediaPicker.prototype.dispose = function() {
@@ -53,11 +53,11 @@
                 }
 
                 for (var i=0, len=items.length; i<len; i++) {
-                    var newFile = this.$fileTemplate.clone()
-                    newFile.children('[data-file-path]').val(items[i].path)
-                    newFile.children('[data-file-name]').text(items[i].title)
-                    newFile.on('click', '.file-remove-button', this.proxy(this.onClickRemoveButton))
-                    newFile.insertAfter($('[data-file-item]', this.$el).get(-1))
+                    var newFile = $(self.$fileTemplate).clone()
+                    newFile.find('[data-file-path]').val(items[i].path)
+                    newFile.find('[data-file-name]').text(items[i].title)
+                    newFile.on('click', '.file-remove-button', self.proxy(self.onClickRemoveButton))
+                    newFile.insertAfter($('[data-file-item]', self.$el).get(-1))
                 }
 
                 this.hide()

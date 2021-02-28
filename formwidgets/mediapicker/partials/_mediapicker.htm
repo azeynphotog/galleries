@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="no-data">
+            <tr class="no-data" data-file-item>
                 <td colspan="2">
                     <p class="no-data">
                         <?= e(trans('azeyn.galleries::lang.images.no_images')) ?>
@@ -31,8 +31,8 @@
                     </a>
                 </td>
                 <td>
-                    <span data-file-name><?= e($value[$i]['title']) ?></span>
-                    <input type="hidden" name="<?= $field->getName() ?>[]" value="<?= e($value[$i]['path']) ?>" data-file-path />
+                    <span data-file-name><?= e(basename($value[$i]->path)) ?></span>
+                    <input type="hidden" name="<?= $field->getName() ?>[]" value="<?= e($value[$i]->path) ?>" />
                 </td>
             </tr>
             <?php } ?>
@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     <span data-file-name></span>
-                    <input type="hidden" name="<?= $field->getName() ?>[]" value="" data-file-path />
+                    <input type="hidden" name="<?= $field->getName() ?>[]" value="" />
                 </td>
             </tr>
         </template>
