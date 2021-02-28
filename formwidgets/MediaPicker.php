@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2021 Azeyn
+ *
+ * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+ */
 
 namespace Azeyn\Galleries\FormWidgets;
 
@@ -53,8 +58,8 @@ class MediaPicker extends FormWidgetBase
         }
 
         $return = [];
-        foreach ($value as $path) {
-            $return[] = DecoratedImage::where('path', $value)->firstOrFail();
+        foreach ((array) $value as $path) {
+            $return[] = DecoratedImage::where('path', $path)->firstOrFail();
         }
 
         return $return;

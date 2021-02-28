@@ -1,3 +1,9 @@
+<!--
+  ~ Copyright (c) 2021 Azeyn
+  ~
+  ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+  -->
+
 <div
     id="<?= $this->getId() ?>"
     class="field-mediapicker <?= $value ? 'is-populated' : '' ?>"
@@ -47,7 +53,7 @@
                 </td>
                 <td>
                     <span data-file-name></span>
-                    <input type="hidden" name="<?= $field->getName() ?>[]" value="" />
+                    <input type="hidden" name="<?= $field->getName() ?>[]" value="" data-file-path />
                 </td>
             </tr>
         </template>
