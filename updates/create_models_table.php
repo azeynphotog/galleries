@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2021 Azeyn
+ *
+ * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+ */
 
 namespace Azeyn\Galleries\Updates;
 
@@ -28,6 +33,6 @@ class CreateModelsTable extends Migration
     public function down(): void
     {
         Schema::dropIfExists('azeyn_galleries_model_image');
-        Scheme::dropIfExists('azeyn_galleries_models');
+        Schema::dropIfExists('azeyn_galleries_models');
     }
 }

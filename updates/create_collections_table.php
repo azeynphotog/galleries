@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2021 Azeyn
+ *
+ * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+ */
 
 namespace Azeyn\Galleries\Updates;
 
@@ -23,13 +28,14 @@ class CreateCollectionsTable extends Migration
             $table->engine = 'InnoDB';
             $table->integer('collection_id')->unsigned();
             $table->integer('image_id')->unsigned();
-            $table->foreign('collection_id')->references('id')->on('azeyn_galleries_collections');
-            $table->foreign('image_id')->references('id')->on('azeyn_galleries_images');
+            $table->foreign('collection_id')->references('id')->on('azeyn_galleries_collections')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('azeyn_galleries_images')->onDelete('cascade');
         });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('azeyn_galleries_collection_image');
         Schema::dropIfExists('azeyn_galleries_collections');
     }
 }
