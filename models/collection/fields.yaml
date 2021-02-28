@@ -10,7 +10,7 @@ fields:
             type: slug
         span: right
         required: true
-    image:
+    images:
         type: mediapicker
     date:
         label: Date
