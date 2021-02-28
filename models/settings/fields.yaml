@@ -1,0 +1,44 @@
+fields:
+    dimension:
+        label: azeyn.galleries::lang.images.dimension
+        description: azeyn.galleries::lang.images.dimension_description
+        type: number
+        required: true
+        min: 1
+        default: 2048
+        span: left
+    responsive_dimensions:
+        label: azeyn.galleries::lang.images.responsive_dimensions
+        description: azeyn.galleries::lang.images.responsive_dimensions_description
+        type: datatable
+        adding: false
+        deleting: false
+        columns:
+            screen_size:
+                title: azeyn.galleries::lang.images.screen
+                type: dropdown
+                readOnly: true
+                options:
+                    xs: azeyn.galleries::lang.images.screen_xs
+                    sm: azeyn.galleries::lang.images.screen_sm
+                    md: azeyn.galleries::lang.images.screen_md
+                    lg: azeyn.galleries::lang.images.screen_lg
+                    xl: azeyn.galleries::lang.images.screen_xl
+            dimension:
+                title: azeyn.galleries::lang.images.dimension
+                type: string
+                validation:
+                    integer:
+                        message: azeyn.galleries::lang.images.dimension_message
+            thumbnail_dimension:
+                title: azeyn.galleries::lang.images.thumbnail_dimension
+                type: string
+                validation:
+                    integer:
+                        message: azeyn.galleries::lang.images.dimension_message
+        required: true
+        span: right
+    secret:
+        label: azeyn.galleries::lang.settings.secret
+        description: azeyn.galleries::lang.settings.secret_description
+        required: true
