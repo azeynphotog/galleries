@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2021 Azeyn
+ *
+ * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+ */
 
 namespace Azeyn\Galleries\Models;
 
@@ -18,6 +23,9 @@ class Collection extends Model
      */
     protected $slugs = ['slug' => 'name'];
 
+    /**
+     * @var string[][]
+     */
     public $belongsToMany = [
         'images' => [
             DecoratedImage::class,
@@ -26,6 +34,10 @@ class Collection extends Model
             'otherKey' => 'image_id'
         ]
     ];
+
+    /**
+     * @var string[]
+     */
     protected $dates = ['created_at', 'updated_at', 'date', 'published_at'];
 
     public function scopePublished($query)
