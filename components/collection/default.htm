@@ -1,0 +1,13 @@
+{% set collection = __SELF__.collection %}
+
+<!--
+  ~ Copyright (c) 2021 Azeyn
+  ~
+  ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+  -->
+
+<h2>{{ collection.name }}</h2>
+
+<div id="gallery-container">
+    <gallery :loaded-images="{{ __SELF__.images }}"></gallery>
+</div>

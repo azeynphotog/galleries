@@ -1,0 +1,24 @@
+{% if not images %}
+    {% set images = __SELF__.images %}
+{% endif %}
+
+{% for image in images %}
+<!--
+  ~ Copyright (c) 2021 Azeyn
+  ~
+  ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+  -->
+
+<div class="item">
+    <div class="item-content">
+        <a href="#" data-img-xs="{{ image.urls.xs }}" data-img-sm="{{ image.urls.sm }}" data-img-md="{{ image.urls.md }}" data-img-lg="{{ image.urls.lg }}">
+            <picture class="thumbnail">
+                <source srcset="{{ image.thumbnail_urls.lg }}" media="(min-width: 992px)" />
+                <source srcset="{{ image.thumbnail_urls.md }}" media="(min-width: 768px)" />
+                <source srcset="{{ image.thumbnail_urls.sm }}" media="(min-width: 576px)" />
+                <img src="{{ image.thumbnail_urls.xs }}" />
+            </picture>
+        </a>
+    </div>
+</div>
+{% endfor %}
