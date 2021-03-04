@@ -89,11 +89,7 @@ class MediaPicker extends FormWidgetBase
             return $return;
         }
 
-        $defaultValue = !$this->model->exists
-            ? $this->formField->getDefaultFromData($this->data ?: $this->model)
-            : null;
-
-        return $this->formField->getValueFromData($this->data ?: $this->model, $defaultValue);
+        return [];
     }
 
     /**
