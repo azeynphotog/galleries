@@ -11,6 +11,7 @@ use Azeyn\Galleries\Classes\TokenGenerator;
 use Azeyn\Galleries\Models\DecoratedImage;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
+use Config;
 use Response;
 
 class Image extends ComponentBase
@@ -73,9 +74,9 @@ class Image extends ComponentBase
         $object = json_decode($decoded, true);
         if (
             !isset($object['i'], $object['e']) ||
-            $object['e'] < ceil(time() / 60)
+            $object['e'] < ceil((time() - Config::get('azeyn.galleries::offset')) / 60)
         ) {
-            Log::debug('Object invalid');
+            Log::debug('Object invalid: ' . $object);
             $this->setStatusCode(403);
             return $this->controller->run(403);
         }

@@ -9,4 +9,7 @@ return [
     'cache'=> [
         'path' => storage_path('temp/images'),
     ],
+    // time() offset
+    // Between 1/1/1970 and 1/1/2021 = 1609459200 seconds
+    'offset' => 1609459200
 ];

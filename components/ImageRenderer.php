@@ -11,6 +11,7 @@ use Azeyn\Galleries\Classes\ImageResizer;
 use Azeyn\Galleries\Classes\TokenGenerator;
 use Cache;
 use Cms\Classes\ComponentBase;
+use Config;
 use Lang;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -53,9 +54,9 @@ class ImageRenderer extends ComponentBase
         $object = json_decode($decoded, true);
         if (
             !isset($object['i'], $object['d'], $object['e']) ||
-            $object['e'] < ceil(time()/60)
+            $object['e'] < ceil((time() - Config::get('azeyn.galleries::offset')) / 60)
         ) {
-            Log::debug('Object invalid');
+            Log::debug('Object invalid: ' . $object);
             $this->setStatusCode(403);
             return $this->controller->run(403);
         }

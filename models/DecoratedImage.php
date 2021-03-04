@@ -8,6 +8,7 @@
 namespace Azeyn\Galleries\Models;
 
 use Azeyn\Galleries\Classes\TokenGenerator;
+use Config;
 use Model as BaseModel;
 use October\Rain\Database\Builder;
 use Storage;
@@ -95,7 +96,7 @@ class DecoratedImage extends BaseModel
             'hash' => TokenGenerator::encode(
                 json_encode([
                     'i' => (int) $this->id,
-                    'e' => (int) ceil(time() / 60 + 60 * 3),
+                    'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 60 * 3),
                 ])
             )
         ];
@@ -108,7 +109,7 @@ class DecoratedImage extends BaseModel
                     json_encode([
                         'i' => (int) $this->id,
                         'd' => (int) $dimension['thumbnail_dimension'],
-                        'e' => (int) ceil(time() / 60 + 5),
+                        'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 5),
                     ])
                 )
             ];
@@ -126,7 +127,7 @@ class DecoratedImage extends BaseModel
             'hash' => TokenGenerator::encode(
                 json_encode([
                     'i' => (int) $this->id,
-                    'e' => (int) ceil(time() / 60 + 60 * 3),
+                    'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 60 * 3),
                 ])
             )
         ];
@@ -139,7 +140,7 @@ class DecoratedImage extends BaseModel
                     json_encode([
                         'i' => (int) $this->id,
                         'd' => (int) $dimension['dimension'],
-                        'e' => (int) ceil(time() / 60 + 5),
+                        'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 5),
                     ])
                 )
             ];
