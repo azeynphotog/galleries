@@ -1,6 +1,12 @@
 <?php Block::put('breadcrumb') ?>
+<!--
+  ~ Copyright (c) 2021 Azeyn
+  ~
+  ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+  -->
+
 <ul>
-    <li><a href="<?= Backend::url('azeyn/galleries/collections') ?>">Galleries</a></li>
+    <li><a href="<?= Backend::url('azeyn/galleries/collections') ?>"><?= e(trans('azeyn.galleries::lang.collections.menu_label')) ?></a></li>
     <li><?= e(trans($this->pageTitle)) ?></li>
 </ul>
 <?php Block::endPut() ?>
@@ -38,13 +44,13 @@
             <?= e(trans('backend::lang.form.save_and_close')) ?>
         </button>
         <span class="btn-text">
-                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('azeyn/galleries/collections/preview/'.$formModel->id) ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
-                </span>
+            <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('azeyn/galleries/collections/preview/'.$formModel->id) ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+        </span>
         <button
             class="oc-icon-trash-o btn-icon danger pull-right"
             data-request="onDelete"
             data-load-indicator="<?= e(trans('backend::lang.form.deleting_name', ['name'=>$formRecordName])) ?>"
-            data-request-confirm="<?= e(trans('rainlab.user::lang.users.delete_confirm')) ?>">
+            data-request-confirm="<?= e(trans('rainlab.user::lang.collections.delete_confirm')) ?>">
         </button>
     </div>
 </div>
