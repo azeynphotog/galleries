@@ -1,0 +1,26 @@
+# Model List Column configuration
+list: ~/plugins/azeyn/galleries/models/model/columns.yaml
+
+# Model Class name
+modelClass: Azeyn\Galleries\Models\Model
+
+# List Title
+title: azeyn.galleries::lang.models.list_title
+
+# Link URL for each record
+recordUrl: azeyn/galleries/models/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 10
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: list_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

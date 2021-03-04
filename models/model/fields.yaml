@@ -1,8 +1,12 @@
 fields:
     name:
-        label: Name
+        label: azeyn.galleries::lang.models.name
+        span: left
+        required: true
     slug:
-        label: Slug
+        label: azeyn.galleries::lang.models.slug
         preset:
             field: name
             type: slug
+        span: right
+        required: true

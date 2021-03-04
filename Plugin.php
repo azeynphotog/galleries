@@ -21,10 +21,10 @@ class Plugin extends PluginBase
     public function pluginDetails(): array
     {
         return [
-            'name'        => 'azeyn.galleries::lang.plugin.name',
+            'name' => 'azeyn.galleries::lang.plugin.name',
             'description' => 'azeyn.galleries::lang.plugin.description',
-            'author'      => 'Azeyn',
-            'icon'        => 'icon-file-image-o',
+            'author' => 'Azeyn',
+            'icon' => 'icon-file-image-o',
         ];
     }
 
@@ -42,7 +42,7 @@ class Plugin extends PluginBase
     {
         return [
             'azeyn.galleries.access_collections' => [
-                'tab'   => 'azeyn.galleries::lang.plugin.tab',
+                'tab' => 'azeyn.galleries::lang.plugin.tab',
                 'label' => 'azeyn.galleries::lang.plugin.access_collections'
             ],
             'azeyn.galleries.access_settings' => [
@@ -74,6 +74,12 @@ class Plugin extends PluginBase
                         'label' => 'azeyn.galleries::lang.collections.menu_label',
                         'icon' => 'icon-file-image-o',
                         'url' => Backend::url('azeyn/galleries/collections'),
+                        'permissions' => ['azeyn.galleries.access_collections']
+                    ],
+                    'models' => [
+                        'label' => 'azeyn.galleries::lang.models.menu_label',
+                        'icon' => 'icon-user',
+                        'url' => Backend::url('azeyn/galleries/models'),
                         'permissions' => ['azeyn.galleries.access_collections']
                     ]
                 ]

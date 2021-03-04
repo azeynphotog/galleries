@@ -1,0 +1,12 @@
+name: azeyn.galleries::lang.models.create_model
+form: ~/plugins/azeyn/galleries/models/model/fields.yaml
+modelClass: Azeyn\Galleries\Models\Model
+defaultRedirect: azeyn/galleries/models
+
+create:
+    redirect: azeyn/galleries/models/update/:id
+    redirectClose: azeyn/galleries/models
+
+update:
+    redirect: azeyn/galleries/models
+    redirectClose: azeyn/galleries/models

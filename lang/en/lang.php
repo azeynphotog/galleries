@@ -61,6 +61,15 @@ return [
         'thumbnail_dimension' => 'Thumbnail dimension',
         'thumbnail_dimension_description' => 'Dimension of the thumbnail at its longest side'
     ],
+    'models' => [
+        'create_model' => 'Model',
+        'delete_confirm' => 'Delete the model?',
+        'list_title' => 'Manage models',
+        'menu_label' => 'Models',
+        'name' => 'Name',
+        'new_model' => 'New model',
+        'slug' => 'Slug'
+    ],
     'settings' => [
         'secret' => 'Secret',
         'secret_description' => '',
