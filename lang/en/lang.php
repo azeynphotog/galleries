@@ -59,7 +59,8 @@ return [
         'screen_xs' => 'Extra small',
         'select' => 'Select images',
         'thumbnail_dimension' => 'Thumbnail dimension',
-        'thumbnail_dimension_description' => 'Dimension of the thumbnail at its longest side'
+        'thumbnail_dimension_description' => 'Dimension of the thumbnail at its longest side',
+        'view' => 'Image info'
     ],
     'models' => [
         'create_model' => 'Model',

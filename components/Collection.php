@@ -99,7 +99,7 @@ class Collection extends ComponentBase
                 'title' => 'azeyn.galleries::lang.images.page',
                 'type' => 'dropdown',
                 'default' => 'galleries/image-info',
-            ],
+            ]
         ];
     }
 

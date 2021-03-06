@@ -29,7 +29,7 @@ class Image extends ComponentBase
     public function componentDetails(): array
     {
         return [
-            'name' => 'azeyn.galleries::lang.images.image',
+            'name' => 'azeyn.galleries::lang.images.view',
             'description' => '',
         ];
     }
