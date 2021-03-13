@@ -1,0 +1,22 @@
+{% set collection = __SELF__.collection %}
+{% set image = __SELF__.image %}
+
+<!--
+  ~ Copyright (c) 2021 Azeyn
+  ~
+  ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+  -->
+
+<div class="collection-preview">
+    <a href="{{ collection.url }}">
+        <picture>
+            <source srcset="{{ image.thumbnail_urls.lg }}" media="(min-width: 992px)" />
+            <source srcset="{{ image.thumbnail_urls.md }}" media="(min-width: 768px)" />
+            <source srcset="{{ image.thumbnail_urls.sm }}" media="(min-width: 576px)" />
+            <img src="{{ image.thumbnail_urls.xs }}" />
+        </picture>
+        <div class="collection-preview-content">
+            <h3>{{ collection.name }}</h3>
+        </div>
+    </a>
+</div>

@@ -39,5 +39,17 @@ module.exports = {
       .use('vue-svg-loader')
       .loader('vue-svg-loader')
   },
+  css: {
+    extract: true,
+    loaderOptions: {
+      css: {
+        modules: {
+          localIdentName: '' +
+            '[local]'
+        }
+      }
+    },
+    requireModuleExtension: false
+  },
   runtimeCompiler: true
 };

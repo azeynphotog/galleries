@@ -8,6 +8,7 @@
 namespace Azeyn\Galleries;
 
 use Azeyn\Galleries\Components\Collection;
+use Azeyn\Galleries\Components\CollectionPreview;
 use Azeyn\Galleries\Components\CollectionsIndex;
 use Azeyn\Galleries\Components\Image;
 use Azeyn\Galleries\Components\ImageRenderer;
@@ -33,6 +34,7 @@ class Plugin extends PluginBase
         return [
             Collection::class => 'collection',
             CollectionsIndex::class => 'collectionsIndex',
+            CollectionPreview::class => 'collectionPreview',
             Image::class => 'image',
             ImageRenderer::class => 'imageRenderer',
         ];

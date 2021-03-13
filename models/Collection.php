@@ -31,14 +31,23 @@ class Collection extends Model
             DecoratedImage::class,
             'table' => 'azeyn_galleries_collection_image',
             'key' => 'collection_id',
-            'otherKey' => 'image_id'
+            'otherKey' => 'image_id',
+            'order' => 'order asc',
+            'pivot' => ['order']
         ]
     ];
+
+    protected $appends = ['cover_image', 'url'];
 
     /**
      * @var string[]
      */
     protected $dates = ['created_at', 'updated_at', 'date', 'published_at'];
+
+    /**
+     * @var string
+     */
+    public $url = '';
 
     public function scopePublished($query)
     {
@@ -62,16 +71,35 @@ class Collection extends Model
     public function setImagesSelectedAttribute($value): void
     {
         $images = [];
-        foreach ($value as $image) {
+        foreach ($value as $key => $image) {
             $instance = DecoratedImage::where('path', $image)->first();
             if (!$instance) {
                 throw new ValidationException([
                     'images_selected' => trans('azeyn.galleries::lang.images.selected_error')
                 ]);
             }
+            $instance->pivot->order = $key;
             $images[] = $instance;
         }
 
         $this->images = $images;
+    }
+
+    public function getCoverImageAttribute(): DecoratedImage
+    {
+        return $this->images()->first();
+    }
+
+    public function getUrlAttribute(): string
+    {
+        return $this->url;
+    }
+
+    public function setUrl($pageName, $controller): self
+    {
+        $this->url = $controller->pageUrl($pageName, [
+            'slug' => $this->slug
+        ]);
+        return $this;
     }
 }

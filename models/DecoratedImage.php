@@ -66,8 +66,9 @@ class DecoratedImage extends BaseModel
     {
         $object = [
             'hash' => TokenGenerator::encode([
-                'id' => $this->id,
-                'dimension' => $dimension,
+                'i' => (int) $this->id,
+                'd' => (int) $dimension,
+                'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 5),
             ])
         ];
         return $controller->pageUrl($pageName, $object);
@@ -102,6 +103,26 @@ class DecoratedImage extends BaseModel
         ];
         $this->url = $controller->pageUrl($infoPage, $object);
 
+        $dimensions = Settings::get('responsive_dimensions');
+        foreach ((array) $dimensions as $dimension) {
+            $object = [
+                'hash' => TokenGenerator::encode(
+                    json_encode([
+                        'i' => (int) $this->id,
+                        'd' => (int) $dimension['thumbnail_dimension'],
+                        'e' => (int) ceil((time() - Config::get('azeyn.galleries::offset')) / 60 + 5),
+                    ])
+                )
+            ];
+            $this->thumbnailUrls[$dimension['screen_size']] = $controller->pageUrl($renderPage, $object);
+        }
+
+        return $this;
+    }
+
+    public function setThumbnailUrls($renderPage, $controller): self
+    {
+        $this->thumbnailUrls = [];
         $dimensions = Settings::get('responsive_dimensions');
         foreach ((array) $dimensions as $dimension) {
             $object = [

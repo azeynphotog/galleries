@@ -24,6 +24,7 @@ return [
         'name' => 'Name',
         'new_collection' => 'New gallery',
         'published_at' => 'Published',
+        'preview' => 'Gallery preview',
         'return_to_list' => 'Return to galleries list',
         'slug' => 'Slug',
         'view' => 'Gallery',
