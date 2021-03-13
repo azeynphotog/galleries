@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 Azeyn
+ *
+ * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+ */
+
 +function ($) { "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -17,6 +23,8 @@
     MediaPicker.prototype.init = function() {
         this.$el.on('click', '.file-add-button', this.proxy(this.onClickFindButton))
         this.$el.on('click', '.file-remove-button', this.proxy(this.onClickRemoveButton))
+
+        $('table', this.$el).tableDnd();
 
         this.$fileTemplate = $('[data-file-template]', this.$el).first().html()
     }

@@ -97,6 +97,7 @@ class MediaPicker extends FormWidgetBase
      */
     protected function loadAssets(): void
     {
+        $this->addJs('js/jquery.tablednd.min.js', 'core');
         $this->addJs('js/mediapicker.js', 'core');
         $this->addCss('css/mediapicker.css', 'core');
     }

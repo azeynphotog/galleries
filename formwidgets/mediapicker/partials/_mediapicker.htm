@@ -15,14 +15,14 @@
     </a>
     <div class="control-list">
         <table class="table data" data-file-list>
-            <thead>
+            <thead class="nodrop nodrag">
             <tr>
                 <th></th>
                 <th><span><?= e(trans('azeyn.galleries::lang.images.filename')) ?></span></th>
             </tr>
             </thead>
             <tbody>
-            <tr class="no-data" data-file-item>
+            <tr class="nodrop nodrag no-data" data-file-item>
                 <td colspan="2">
                     <p class="no-data">
                         <?= e(trans('azeyn.galleries::lang.images.no_images')) ?>
@@ -30,7 +30,7 @@
                 </td>
             </tr>
             <?php for ($i = 0; $i < count($value); $i++) { ?>
-            <tr data-file-item>
+            <tr class="nodrop" data-file-item>
                 <td>
                     <a href="javascript:;" class="file-remove-button">
                         <i class="icon-times"></i>
@@ -45,7 +45,7 @@
             </tbody>
         </table>
         <template data-file-template>
-            <tr data-file-item>
+            <tr class="nodrop" data-file-item>
                 <td>
                     <a href="javascript:;" class="file-remove-button">
                         <i class="icon-times"></i>
