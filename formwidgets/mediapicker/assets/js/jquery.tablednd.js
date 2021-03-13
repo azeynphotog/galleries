@@ -1,7 +1,9 @@
-/*
- * Copyright (c) 2021 Azeyn
- *
- * The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
+/**
+ * TableDnD plug-in for JQuery, allows you to drag and drop table rows
+ * You can set up various options to control how the system will work
+ * Copyright (c) Denis Howlett <denish@isocra.com>
+ * License: MIT.
+ * See https://github.com/isocra/TableDnD
  */
 
 /*jshint -W054 */
