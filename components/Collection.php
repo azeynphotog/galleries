@@ -138,10 +138,10 @@ class Collection extends ComponentBase
 
         $this->images = $this->page['images'] = $this->loadImages();
 
-        $this->addCss('/plugins/azeyn/galleries/assets/css/app.css', 'Azeyn.Galleries');
+        $this->addCss('/plugins/azeyn/galleries/assets/css/gallery.css', 'Azeyn.Galleries');
         $this->addJs('/plugins/azeyn/galleries/assets/js/chunk-vendors.js', 'Azeyn.Galleries');
         $this->addJs('/plugins/azeyn/galleries/assets/js/jquery.mousewheel.js', 'Azeyn.Galleries');
-        $this->addJs('/plugins/azeyn/galleries/assets/js/app.js', 'Azeyn.Galleries');
+        $this->addJs('/plugins/azeyn/galleries/assets/js/gallery.js', 'Azeyn.Galleries');
     }
 
     public function onNextPage()

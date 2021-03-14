@@ -96,7 +96,9 @@ class CollectionPreview extends ComponentBase
         $this->collection = $this->page['collection'] = $this->loadCollection();
         $this->image = $this->page['image'] = $this->loadCoverImage();
 
-        $this->addCss('/plugins/azeyn/galleries/assets/css/app.css', 'Azeyn.Galleries');
+        $this->addCss('/plugins/azeyn/galleries/assets/css/preview.css', 'Azeyn.Galleries');
+        $this->addJs('/plugins/azeyn/galleries/assets/js/chunk-vendors.js', 'Azeyn.Galleries');
+        $this->addJs('/plugins/azeyn/galleries/assets/js/preview.js', 'Azeyn.Galleries');
     }
 
     private function loadCollection()

@@ -5,16 +5,19 @@
  */
 
 .collection-preview {
-    position: relative;
-    z-index: 1;
+    display: block;
+    position: absolute;
     width: fit-content;
     height: fit-content;
+    margin-right: 15px;
+    z-index: 1;
 
-    picture {
-        z-index: 1;
+    &-grid {
+        position: relative;
     }
 
-    .collection-preview-content {
+    &-content {
+        display: flex;
         position: absolute;
         top: 0;
         left: 0;
@@ -22,6 +25,13 @@
         height: 100%;
         color: white;
         hyphens: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         z-index: 10;
+    }
+
+    picture {
+        z-index: 1;
     }
 }

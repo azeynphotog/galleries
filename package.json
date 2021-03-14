@@ -6,35 +6,37 @@
     "files": [
         "src/**/*"
     ],
-    "main": "src/galleries.js",
+    "main": "src/npm.js",
     "scripts": {
-        "dev": "vue-cli-service build --mode development src/index.js",
-        "prod": "vue-cli-service build src/index.js",
-        "lint": "vue-cli-service lint"
+        "dev": "webpack --mode development"
     },
     "dependencies": {
         "core-js": "^3.6.5",
         "jquery-mousewheel": "^3.1.13",
         "lodash": "^4.17.21",
         "muuri": "^0.9.3",
-        "vue": "^3.0.0",
-        "vue-template-compiler": "^2.6.12"
+        "vue": "^3.0.0"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "~4.5.0",
-        "@vue/cli-plugin-eslint": "~4.5.0",
-        "@vue/cli-service": "~4.5.0",
-        "@vue/compiler-sfc": "^3.0.0",
+        "@babel/core": "^7.13.10",
+        "@babel/preset-env": "^7.13.10",
+        "@vue/compiler-sfc": "^3.0.7",
         "@vue/eslint-config-airbnb": "^5.0.2",
         "babel-eslint": "^10.1.0",
+        "babel-loader": "^8.2.2",
+        "copy-webpack-plugin": "^5.1.2",
         "eslint": "^6.7.2",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-vue": "^7.0.0-0",
         "fibers": "^5.0.0",
+        "mini-css-extract-plugin": "^0.9.0",
         "sass": "^1.32.8",
         "sass-loader": "^10.1.1",
+        "vue-loader": "^16.1.2",
         "vue-loader-v16": "npm:vue-loader@^16.1.2",
-        "vue-svg-loader": "^0.17.0-beta.2"
+        "vue-svg-loader": "^0.17.0-beta.2",
+        "webpack": "^4.46.0",
+        "webpack-cli": "^4.5.0"
     },
     "repository": {
         "type": "git",
