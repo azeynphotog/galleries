@@ -35,6 +35,11 @@ class Collection extends ComponentBase
     public $pageParam;
 
     /**
+     * @var bool
+     */
+    public $hideTitle;
+
+    /**
      * @var string
      */
     public $indexPage;
@@ -85,6 +90,10 @@ class Collection extends ComponentBase
                 'description' => 'azeyn.galleries::lang.components.infinite_scroll_description',
                 'type' => 'checkbox',
             ],
+            'hideTitle' => [
+                'title' => 'azeyn.galleries::lang.components.hide_title',
+                'type' => 'checkbox',
+            ],
             'indexPage' => [
                 'title' => 'azeyn.galleries::lang.collections.index_page',
                 'type' => 'dropdown',
@@ -130,6 +139,7 @@ class Collection extends ComponentBase
             $this->pageNumber = $this->page['page'] = $this->property('pageNumber');
         }
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
+        $this->hideTitle = $this->page['hideTitle'] = $this->property('hideTitle');
         $this->collection = $this->page['collection'] = $this->loadCollection();
         if (!$this->collection) {
             $this->setStatusCode(404);

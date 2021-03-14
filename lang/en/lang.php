@@ -31,6 +31,7 @@ return [
         'view_page' => 'Gallery page',
     ],
     'components' => [
+        'hide_title' => 'Hide title',
         'infinite_scroll' => 'Infinite scroll',
         'infinite_scroll_description' => 'Enable automatic loading of content on scroll to bottom',
         'items_per_page' => 'Items per page',

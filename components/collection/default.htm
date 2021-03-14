@@ -6,8 +6,10 @@
   ~ The galleries plugin is licensed under the PolyForm Noncommercial License 1.0.0
   -->
 
+{% if not __SELF__.hideTitle %}
 <h2>{{ collection.name }}</h2>
 
+{% endif %}
 <div id="gallery-container">
     <gallery :loaded-images="{{ __SELF__.images }}"></gallery>
 </div>
