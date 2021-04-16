@@ -9,10 +9,10 @@ namespace Azeyn\Galleries\Classes;
 
 use Azeyn\Galleries\Models\DecoratedImage;
 use Config;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Imagick;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use October\Rain\Filesystem\FilesystemAdapter;
 
 class ImageResizer
 {
