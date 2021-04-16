@@ -10,7 +10,7 @@ namespace Azeyn\Galleries\FormWidgets;
 use Azeyn\Galleries\Models\DecoratedImage;
 use Backend\Classes\FormField;
 use Backend\Classes\FormWidgetBase;
-use System\Classes\MediaLibrary;
+use Media\Classes\MediaLibrary;
 
 class MediaPicker extends FormWidgetBase
 {
