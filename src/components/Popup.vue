@@ -74,6 +74,12 @@
         />
         <img :src="urls.xs" />
       </picture>
+      <div
+        v-if="!imageLoaded"
+        class="loader-container"
+      >
+        <div class="loader" />
+      </div>
     </div>
   </div>
 </template>
@@ -103,6 +109,7 @@ export default {
   emits: ['back', 'next', 'dismiss'],
   data() {
     return {
+      imageLoaded: false,
       urls: {
         xs: '',
         sm: '',
@@ -133,6 +140,7 @@ export default {
         dataType: 'json'
       }).done(imageObj => {
         let self = this
+        this.imageLoaded = true
         $('img', this.$refs.image)
           .css('height', $(this.$refs.imageContainer).height() * this.zoomLevel)
           .on('load', () => {
@@ -141,8 +149,8 @@ export default {
               $('img', self.$refs.image).height()
             ];
             $(self.$refs.image)
-              .css('left', (this.viewport[0]/2 - self.image[0]/2) + 'px')
-              .css('top', (this.toolbarHeight + (this.viewport[1] - this.toolbarHeight)/2 - self.image[1]/2) + 'px')
+              .css('left', (self.viewport[0]/2 - self.image[0]/2) + 'px')
+              .css('top', (self.toolbarHeight + (self.viewport[1] - self.toolbarHeight)/2 - self.image[1]/2) + 'px')
           })
         this.urls = imageObj.urls
       })
@@ -164,6 +172,7 @@ export default {
       dataType: 'json'
     }).done(imageObj => {
       let self = this
+      this.imageLoaded = true
       $('img', this.$refs.image)
         .css('height', $(this.$refs.imageContainer).height() * this.zoomLevel)
         .on('load', () => {
@@ -172,8 +181,8 @@ export default {
             $('img', self.$refs.image).height()
           ];
           $(self.$refs.image)
-            .css('left', (this.viewport[0] / 2 - self.image[0] / 2) + 'px')
-            .css('top', (this.toolbarHeight + (this.viewport[1] - this.toolbarHeight) / 2 - self.image[1] / 2) + 'px')
+            .css('left', (self.viewport[0] / 2 - self.image[0] / 2) + 'px')
+            .css('top', (self.toolbarHeight + (self.viewport[1] - self.toolbarHeight) / 2 - self.image[1] / 2) + 'px')
         })
       this.urls = imageObj.urls
     })
@@ -343,6 +352,46 @@ export default {
 
 .next-button > .toolbar-button {
   margin: auto 5px;
+}
+
+.loader-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
+
+.loader {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #ffffff;
+  transform: translateZ(0);
+  animation: load8 1.1s infinite linear;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .image-container {
