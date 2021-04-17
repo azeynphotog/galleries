@@ -5,23 +5,49 @@
   -->
 
 <template>
-  <div class="grid" @scroll.passive="scroll" ref="gridRef">
-    <div class="item" v-for="(image, index) in images" :key="image.id" :data-id="index">
+  <div
+    ref="gridRef"
+    class="grid"
+    @scroll.passive="scroll"
+  >
+    <div
+      v-for="(image, index) in images"
+      :key="image.id"
+      :data-id="index"
+      class="item"
+    >
       <div class="item-content">
         <a @click.prevent="toggle(index, image.url)">
           <picture class="thumbnail">
-            <source :srcset="image.thumbnail_urls.lg" media="(min-width: 992px)" />
-            <source :srcset="image.thumbnail_urls.md" media="(min-width: 768px)" />
-            <source :srcset="image.thumbnail_urls.sm" media="(min-width: 576px)" />
-            <img :src="image.thumbnail_urls.xs" @load="layout" />
+            <source
+              :srcset="image.thumbnail_urls.lg"
+              media="(min-width: 992px)"
+            />
+            <source
+              :srcset="image.thumbnail_urls.md"
+              media="(min-width: 768px)"
+            />
+            <source
+              :srcset="image.thumbnail_urls.sm"
+              media="(min-width: 576px)"
+            />
+            <img
+              :src="image.thumbnail_urls.xs"
+              @load="layout"
+            />
           </picture>
         </a>
       </div>
     </div>
   </div>
   <Popup
-    v-if="selected" :image-url="selectedImage" :back-disabled="backDisabled"
-    :next-disabled="nextDisabled" @back="back" @next="next" @dismiss="dismiss"
+    v-if="selected"
+    :image-url="selectedImage"
+    :back-disabled="backDisabled"
+    :next-disabled="nextDisabled"
+    @back="back"
+    @next="next"
+    @dismiss="dismiss"
   />
 </template>
 
@@ -32,20 +58,11 @@ import Popup from './Popup'
 
 export default {
   name: 'Gallery',
-  props: {
-    loadedImages: Array
-  },
   components: {
     Popup
   },
-  data() {
-    return {
-      selected: false,
-      selectedId: null,
-      selectedImage: null,
-      backDisabled: false,
-      nextDisabled: false
-    }
+  props: {
+    loadedImages: Array
   },
   setup(props) {
     const grid = ref(null)
@@ -74,6 +91,15 @@ export default {
       grid,
       gridRef,
       layout
+    }
+  },
+  data() {
+    return {
+      selected: false,
+      selectedId: null,
+      selectedImage: null,
+      backDisabled: false,
+      nextDisabled: false
     }
   },
   methods: {
@@ -125,7 +151,6 @@ export default {
 .item {
   display: block;
   position: absolute;
-  margin-right: 5px;
   z-index: 1;
 }
 

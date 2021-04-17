@@ -6,36 +6,72 @@
 
 <template>
   <div class="popup">
-    <div class="toolbar" ref="toolbar">
+    <div
+      ref="toolbar"
+      class="toolbar"
+    >
+      <div>&nbsp;</div>
       <div>
-      </div>
-      <div>
-        <button class="toolbar-button" :disabled="zoomInDisabled" @click.prevent="zoomIn">
+        <button
+          class="toolbar-button"
+          :disabled="zoomInDisabled"
+          @click.prevent="zoomIn"
+        >
           <ZoomIn />
         </button>
-        <button class="toolbar-button" :disabled="zoomOutDisabled" @click.prevent="zoomOut">
+        <button
+          class="toolbar-button"
+          :disabled="zoomOutDisabled"
+          @click.prevent="zoomOut"
+        >
           <ZoomOut />
         </button>
-        <button class="toolbar-button" @click.prevent="dismiss">
+        <button
+          class="toolbar-button"
+          @click.prevent="dismiss"
+        >
           <Times />
         </button>
       </div>
     </div>
     <div class="back-button">
-      <button class="toolbar-button" :disabled="backDisabled" @click.prevent="back">
+      <button
+        class="toolbar-button"
+        :disabled="backDisabled"
+        @click.prevent="back"
+      >
         <Back />
       </button>
     </div>
     <div class="next-button">
-      <button class="toolbar-button" :disabled="nextDisabled" @click.prevent="next">
+      <button
+        class="toolbar-button"
+        :disabled="nextDisabled"
+        @click.prevent="next"
+      >
         <Next />
       </button>
     </div>
-    <div class="image-container" ref="imageContainer">
-      <picture class="image" ref="image">
-        <source :srcset="urls.lg" media="(min-width: 992px)" />
-        <source :srcset="urls.md" media="(min-width: 768px)" />
-        <source :srcset="urls.sm" media="(min-width: 576px)" />
+    <div
+      ref="imageContainer"
+      class="image-container"
+    >
+      <picture
+        ref="image"
+        class="image"
+      >
+        <source
+          :srcset="urls.lg"
+          media="(min-width: 992px)"
+        />
+        <source
+          :srcset="urls.md"
+          media="(min-width: 768px)"
+        />
+        <source
+          :srcset="urls.sm"
+          media="(min-width: 576px)"
+        />
         <img :src="urls.xs" />
       </picture>
     </div>
@@ -52,11 +88,6 @@ import ZoomOut from '../assets/zoom-out.svg'
 
 export default {
   name: 'Popup',
-  props: {
-    imageUrl: String,
-    backDisabled: Boolean,
-    nextDisabled: Boolean
-  },
   components: {
     Back,
     Next,
@@ -64,6 +95,12 @@ export default {
     ZoomIn,
     ZoomOut
   },
+  props: {
+    imageUrl: String,
+    backDisabled: Boolean,
+    nextDisabled: Boolean
+  },
+  emits: ['back', 'next', 'dismiss'],
   data() {
     return {
       urls: {
@@ -80,7 +117,14 @@ export default {
       toolbarHeight: 0
     }
   },
-  emits: ['back', 'next', 'dismiss'],
+  computed: {
+    zoomInDisabled() {
+      return this.zoomLevel >= Math.pow(1.25, 5)
+    },
+    zoomOutDisabled() {
+      return this.zoomLevel <= 1/Math.pow(1.25, 2)
+    }
+  },
   watch: {
     imageUrl() {
       this.zoomLevel = 1/1.25
@@ -104,13 +148,74 @@ export default {
       })
     }
   },
-  computed: {
-    zoomInDisabled() {
-      return this.zoomLevel >= Math.pow(1.25, 5)
-    },
-    zoomOutDisabled() {
-      return this.zoomLevel <= 1/Math.pow(1.25, 2)
-    }
+  beforeUnmount() {
+    $(window).off('resize', this.getDimensions(this))
+    $(document).off('keydown', event => {
+      if (event.key === 'Escape') {
+        this.$emit('dismiss')
+      }
+    })
+  },
+  mounted() {
+    this.getDimensions(this)
+    $(window).on('resize', () => this.getDimensions(this))
+
+    $.get(this.imageUrl, {
+      dataType: 'json'
+    }).done(imageObj => {
+      let self = this
+      $('img', this.$refs.image)
+        .css('height', $(this.$refs.imageContainer).height() * this.zoomLevel)
+        .on('load', () => {
+          self.image = [
+            $('img', self.$refs.image).width(),
+            $('img', self.$refs.image).height()
+          ];
+          $(self.$refs.image)
+            .css('left', (this.viewport[0] / 2 - self.image[0] / 2) + 'px')
+            .css('top', (this.toolbarHeight + (this.viewport[1] - this.toolbarHeight) / 2 - self.image[1] / 2) + 'px')
+        })
+      this.urls = imageObj.urls
+    })
+
+    $(this.$refs.image)
+      .mousedown(event => {
+        event.preventDefault()
+        let offset = $(this.$refs.image).offset()
+
+        this.mouseDown = true
+        this.offset = [
+          offset.left - event.clientX,
+          offset.top - event.clientY
+        ]
+      }).mouseup(() => {
+      this.mouseDown = false
+    }).mousemove(event => {
+      event.preventDefault()
+
+      if (this.mouseDown) {
+        $(this.$refs.image).css('left', Math.min(event.clientX + this.offset[0], this.viewport[0] - 15) + 'px')
+        $(this.$refs.image).css('top', Math.min(event.clientY + this.offset[1], this.viewport[1] - 15) + 'px')
+      }
+    }).dblclick(() => {
+      this.zoomIn()
+    })
+    $(this.$refs.imageContainer).mousewheel(event => {
+      event.preventDefault()
+
+      let newZoom = this.zoomLevel * Math.pow(1.1, event.deltaY / -100)
+      if (newZoom > Math.pow(1.25, 5) || newZoom < 1 / Math.pow(1.25, 2)) {
+        return
+      }
+      this.zoomLevel = newZoom
+      this.resizeImage(this)
+    })
+
+    $(document).on('keydown', event => {
+      if (event.key === 'Escape') {
+        this.$emit('dismiss')
+      }
+    })
   },
   methods: {
     zoomIn() {
@@ -162,75 +267,6 @@ export default {
     dismiss() {
       this.$emit('dismiss')
     }
-  },
-  mounted() {
-    this.getDimensions(this)
-    $(window).on('resize', () => this.getDimensions(this))
-
-    $.get(this.imageUrl, {
-      dataType: 'json'
-    }).done(imageObj => {
-      let self = this
-      $('img', this.$refs.image)
-        .css('height', $(this.$refs.imageContainer).height() * this.zoomLevel)
-        .on('load', () => {
-          self.image = [
-            $('img', self.$refs.image).width(),
-            $('img', self.$refs.image).height()
-          ];
-          $(self.$refs.image)
-            .css('left', (this.viewport[0]/2 - self.image[0]/2) + 'px')
-            .css('top', (this.toolbarHeight + (this.viewport[1] - this.toolbarHeight)/2 - self.image[1]/2) + 'px')
-        })
-      this.urls = imageObj.urls
-    })
-
-    $(this.$refs.image)
-      .mousedown(event => {
-        event.preventDefault()
-        let offset = $(this.$refs.image).offset()
-
-        this.mouseDown = true
-        this.offset = [
-          offset.left - event.clientX,
-          offset.top - event.clientY
-        ]
-      }).mouseup(() => {
-        this.mouseDown = false
-      }).mousemove(event => {
-        event.preventDefault()
-
-        if (this.mouseDown) {
-          $(this.$refs.image).css('left', Math.min(event.clientX + this.offset[0], this.viewport[0] - 15) + 'px')
-          $(this.$refs.image).css('top', Math.min(event.clientY + this.offset[1], this.viewport[1] - 15) + 'px')
-        }
-      }).dblclick(() => {
-        this.zoomIn()
-      })
-    $(this.$refs.imageContainer).mousewheel(event => {
-      event.preventDefault()
-
-      let newZoom = this.zoomLevel * Math.pow(1.1, event.deltaY / -100)
-      if (newZoom > Math.pow(1.25, 5) || newZoom < 1/Math.pow(1.25, 2)) {
-        return
-      }
-      this.zoomLevel = newZoom
-      this.resizeImage(this)
-    })
-
-    $(document).on('keydown', event => {
-      if (event.key === 'Escape') {
-        this.$emit('dismiss')
-      }
-    })
-  },
-  beforeUnmount() {
-    $(window).off('resize', this.getDimensions(this))
-    $(document).off('keydown', event => {
-      if (event.key === 'Escape') {
-        this.$emit('dismiss')
-      }
-    })
   }
 }
 </script>
