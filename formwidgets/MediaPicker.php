@@ -10,7 +10,8 @@ namespace Azeyn\Galleries\FormWidgets;
 use Azeyn\Galleries\Models\DecoratedImage;
 use Backend\Classes\FormField;
 use Backend\Classes\FormWidgetBase;
-use Media\Classes\MediaLibrary;
+use Media\Classes\MediaLibrary as LibraryV2;
+use System\Classes\MediaLibrary as LibraryV1;
 
 class MediaPicker extends FormWidgetBase
 {
@@ -78,7 +79,11 @@ class MediaPicker extends FormWidgetBase
             $return = [];
             foreach ((array) $this->formField->value as $id) {
                 $image = DecoratedImage::find($id);
-                $directory = MediaLibrary::instance()->listFolderContents(dirname($image->path), 'title', null, true);
+                if (class_exists('System')) {
+                    $directory = LibraryV2::instance()->listFolderContents(dirname($image->path), 'title', null, true);
+                } else {
+                    $directory = LibraryV1::instance()->listFolderContents(dirname($image->path), 'title', null, true);
+                }
                 foreach ($directory as $file) {
                     if ($file->path === $image->path) {
                         $return[] = $file;

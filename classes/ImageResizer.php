@@ -9,10 +9,11 @@ namespace Azeyn\Galleries\Classes;
 
 use Azeyn\Galleries\Models\DecoratedImage;
 use Config;
-use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Filesystem\FilesystemAdapter as AdapterV2;
 use Imagick;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use October\Rain\Filesystem\FilesystemAdapter as AdapterV1;
 
 class ImageResizer
 {
@@ -24,7 +25,11 @@ class ImageResizer
         $adapter = new Local(Config::get('azeyn.galleries::cache.path'));
         $filesystem = new Filesystem($adapter);
 
-        $this->adapter = new FilesystemAdapter($filesystem);
+        if (class_exists('System'))  {
+            $this->adapter = new AdapterV2($filesystem);
+        } else {
+            $this->adapter = new AdapterV1($filesystem);
+        }
     }
 
     public function resizeImage(string $id, string $dimension): bool
