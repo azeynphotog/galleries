@@ -56,7 +56,7 @@ class ImageRenderer extends ComponentBase
             !isset($object['i'], $object['d'], $object['e']) ||
             $object['e'] < ceil((time() - Config::get('azeyn.galleries::offset')) / 60)
         ) {
-            Log::debug('Object invalid: ' . $object);
+            Log::debug('Object invalid: ' . implode($object));
             $this->setStatusCode(403);
             return $this->controller->run(403);
         }

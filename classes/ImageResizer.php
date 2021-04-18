@@ -47,7 +47,7 @@ class ImageResizer
             return false;
         }
 
-        $path = realpath(__DIR__ . '/../../../..'. media_path($image->path));
+        $path = realpath(__DIR__ . '/../../../../storage/app/media' . $image->path);
         if (!$path) {
             return false;
         }
