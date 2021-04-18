@@ -1,12 +1,18 @@
 {
     "name": "azeyn/galleries",
+    "description": "An OctoberCMS plugin to organize, manage and display photos in websites.",
     "type": "october-plugin",
+    "homepage": "https://github.com/azeynphotog/galleries",
+    "license": "PolyForm-Noncommercial-1.0.0",
     "authors": [
         {
             "name": "Azeyn",
             "email": "hi@azeyn.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/azeynphotog/galleries/issues"
+    },
     "require": {
         "php": ">=7.2",
         "composer/installers": "~1.0",
