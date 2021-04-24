@@ -8,7 +8,8 @@
     ],
     "main": "src/npm.js",
     "scripts": {
-        "dev": "webpack --mode development"
+        "dev": "webpack --mode development",
+        "prod": "webpack"
     },
     "dependencies": {
         "core-js": "^3.6.5",
