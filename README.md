@@ -12,6 +12,10 @@ The galleries plugin require the following:
 * ImageMagick
 * PHP ``iconv``, ``imagick``, ``libxml``, ``mbstring``, ``openssl``, ``xml``, ``xmlreader`` extensions
 
+#### Plugin dependencies
+
+* [Magic Forms plugin](https://octobercms.com/plugin/martin-forms)
+
 #### Library dependencies
 
 * [jQuery](https://jquery.com/)
