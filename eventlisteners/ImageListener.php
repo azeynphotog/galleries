@@ -3,7 +3,6 @@
 namespace Azeyn\Galleries\EventListeners;
 
 use Azeyn\Galleries\Models\DecoratedImage;
-use Backend\Widgets\MediaManager;
 use Illuminate\Http\UploadedFile;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -11,7 +10,7 @@ use Wikimedia\XMPReader\Reader;
 
 class ImageListener
 {
-    public function uploaded(MediaManager $media, string $path, UploadedFile $file): void
+    public function uploaded($media, string $path, UploadedFile $file): void
     {
         Log::debug('Media file ' . $path . ' uploaded');
 
@@ -48,7 +47,7 @@ class ImageListener
         $image->save();
     }
 
-    public function modified(MediaManager $manager, string $original, string $new): void
+    public function modified($manager, string $original, string $new): void
     {
         $image = DecoratedImage::where('path', $original)->first();
         if (!$image) {
@@ -59,7 +58,7 @@ class ImageListener
         $image->save();
     }
 
-    public function deleted(MediaManager $media, string $path): void
+    public function deleted($media, string $path): void
     {
         Log::debug('Media file ' . $path . ' deleted');
 
